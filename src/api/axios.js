@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: "https://sweet-shop-backend-9ly4.onrender.com",
 });
 
 // JWT automatically attach karega
