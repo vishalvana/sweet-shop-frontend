@@ -64,8 +64,8 @@ const Login = () => {
           <motion.img 
             initial={{ scale: 1.1 }}
             animate={{ scale: 1 }}
-            transition={{ duration: 10, repeat: Infinity, repeatType: "reverse" }}
-            src="/sweets-banner.jpg" // <--- YOUR PUBLIC IMAGE HERE
+            transition={{ duration: 5, repeat: Infinity, repeatType: "reverse" }}
+            src="/sweet-banner.jpg" // <--- YOUR PUBLIC IMAGE HERE
             alt="Mithai Background" 
             className="absolute inset-0 w-full h-full object-cover opacity-60"
           />
@@ -79,7 +79,7 @@ const Login = () => {
               transition={{ delay: 0.3 }}
               className="text-5xl font-serif font-bold mb-6 leading-tight"
             >
-              Taste the <br/> <span className="text-orange-300">Tradition</span>
+             
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0 }}
@@ -87,8 +87,7 @@ const Login = () => {
               transition={{ delay: 0.5 }}
               className="text-orange-100 text-lg font-light leading-relaxed max-w-md"
             >
-              Log in to track your orders, save your favorite mithai boxes, and get exclusive festive offers.
-            </motion.p>
+               </motion.p>
           </div>
 
           {/* Decorative Circles */}
@@ -113,7 +112,7 @@ const Login = () => {
               
               {/* Email Input */}
               <div className="relative group">
-                <label className={`absolute left-0 transition-all duration-300 ${focusedInput === 'email' || email ? '-top-6 text-xs text-orange-600 font-bold' : 'top-3 text-gray-400'}`}>
+                <label className={`absolute left-10 transition-all duration-300 ${focusedInput === 'email' || email ? '-top-6 text-xs text-orange-600 font-bold' : 'top-3 text-gray-400'}`}>
                   Email Address
                 </label>
                 <div className="relative flex items-center">
@@ -131,7 +130,7 @@ const Login = () => {
 
               {/* Password Input */}
               <div className="relative group mt-8">
-                <label className={`absolute left-0 transition-all duration-300 ${focusedInput === 'password' || password ? '-top-6 text-xs text-orange-600 font-bold' : 'top-3 text-gray-400'}`}>
+                <label className={`absolute left-10 transition-all duration-300 ${focusedInput === 'password' || password ? '-top-6 text-xs text-orange-600 font-bold' : 'top-3 text-gray-400'}`}>
                   Password
                 </label>
                 <div className="relative flex items-center">
@@ -154,13 +153,7 @@ const Login = () => {
                 </div>
               </div>
 
-              <div className="flex justify-between items-center text-sm mt-4">
-                <label className="flex items-center gap-2 cursor-pointer text-gray-600 hover:text-gray-900 transition-colors">
-                  <input type="checkbox" className="w-4 h-4 rounded text-orange-600 focus:ring-orange-500 border-gray-300" />
-                  Remember me
-                </label>
-                <a href="#" className="text-orange-600 font-medium hover:text-orange-700 hover:underline">Forgot Password?</a>
-              </div>
+             
 
               {/* Login Button */}
               <motion.button
@@ -177,21 +170,8 @@ const Login = () => {
               </motion.button>
             </form>
 
-            <div className="mt-8 relative flex items-center justify-center">
-              <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-gray-200"></div></div>
-              <span className="relative z-10 bg-white px-4 text-sm text-gray-400 bg-white">Or continue with</span>
-            </div>
 
-            <div className="grid grid-cols-2 gap-4 mt-6">
-              <button className="flex items-center justify-center gap-2 py-3 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors text-sm font-medium text-gray-700">
-                 <img src="https://www.svgrepo.com/show/475656/google-color.svg" className="w-5 h-5" alt="Google" />
-                 Google
-              </button>
-              <button className="flex items-center justify-center gap-2 py-3 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors text-sm font-medium text-gray-700">
-                <img src="https://www.svgrepo.com/show/475647/facebook-color.svg" className="w-5 h-5" alt="Facebook" />
-                Facebook
-              </button>
-            </div>
+            
 
             <p className="text-center text-gray-500 text-sm mt-8">
               Don't have an account? <NavLink to="/register" className="text-orange-600 font-medium hover:underline">

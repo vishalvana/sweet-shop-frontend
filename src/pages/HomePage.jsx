@@ -112,7 +112,7 @@ const Hero = () => {
         <img 
           src="/hero.png" 
           alt="Indian Sweets Background" 
-          className="w-full h-full object-cover scale-110"
+          className="w-full h-3/4 object-cover scale-110"
         />
       </motion.div>
 
@@ -221,35 +221,84 @@ const ProductCard = ({ product }) => {
 };
 
 const ProductSection = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchSweets = async () => {
+      try {
+        const res = await fetch("/api/sweets");
+        if (!res.ok) throw new Error("Failed to fetch sweets");
+        const data = await res.json();
+
+        // Normalize backend response
+        const normalized = data.map((item) => ({
+          id: item._id || item.id,
+          name: item.name,
+          desc: item.description || item.desc || "Delicious handcrafted sweet",
+          price: item.price ? `₹${item.price}` : "₹—",
+          image:
+            item.imageUrl ||
+            item.image ||
+            "https://via.placeholder.com/400x400?text=Mithai",
+          tag: item.tag || "Popular",
+        }));
+
+        setProducts(normalized);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSweets();
+  }, []);
+
   return (
     <div className="py-24 bg-white relative overflow-hidden" id="collections">
-      {/* Decorative Background Blob */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-50 rounded-full blur-3xl -z-10 opacity-50 translate-x-1/2 -translate-y-1/2" />
-      
+
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16">
           <div>
-            <span className="text-orange-500 font-bold uppercase tracking-widest text-sm">Curated Selection</span>
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mt-2">Bestselling Delicacies</h2>
+            <span className="text-orange-500 font-bold uppercase tracking-widest text-sm">
+              Curated Selection
+            </span>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mt-2">
+              Bestselling Delicacies
+            </h2>
           </div>
-          <button className="hidden md:flex items-center gap-2 text-gray-600 hover:text-orange-600 transition-colors font-medium mt-4 md:mt-0">
-            View All Products <ChevronRight size={20} />
-          </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {PRODUCTS.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-        
-        <button className="md:hidden w-full mt-8 py-3 border border-gray-300 rounded-xl font-medium text-gray-700">
-          View All Products
-        </button>
+        {/* 🔄 Loading State */}
+        {loading && (
+          <div className="text-center text-gray-500 text-lg">
+            Loading sweets...
+          </div>
+        )}
+
+        {/* ❌ Error State */}
+        {error && (
+          <div className="text-center text-red-500 text-lg">
+            {error}
+          </div>
+        )}
+
+        {/* ✅ Products */}
+        {!loading && !error && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
 };
+
 
 const Banner = () => {
   return (
